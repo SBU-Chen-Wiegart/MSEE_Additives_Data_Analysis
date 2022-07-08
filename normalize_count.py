@@ -7,7 +7,6 @@ Created on Thu Jun 30 12:53:23 2022
 import numpy as np
 import h5py
 from skimage import io, exposure
-import tifffile as tif
 import matplotlib.pyplot as plt
 from os.path import exists
 
