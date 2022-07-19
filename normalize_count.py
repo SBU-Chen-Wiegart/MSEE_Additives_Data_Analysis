@@ -30,7 +30,7 @@ def rescale(img):
 
 if __name__ == '__main__':
     # loop over scans to be processed
-    for i in range(99928, 99945+1):
+    for i in range(99945, 99945+1):
         scan_id = str(i)
         in_path = 'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Molten Salt/EuCl3_in-situ/count_scans/'
         out_path = in_path
@@ -55,7 +55,7 @@ if __name__ == '__main__':
         plt.imshow(norm_img[0])
         plt.show()
         
-        norm_img = rescale(norm_img)
-        io.imsave(out_path + f'{scan_id}_normalized_rescaled.tif', norm_img)
+        # norm_img = rescale(norm_img)
+        io.imsave(out_path + f'{scan_id}_normalized.tif', norm_img)
         
         
