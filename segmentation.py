@@ -102,38 +102,5 @@ if __name__ == '__main__':
         if any(str(scan_id) in scan for scan_id in scan_list):
             image3d = io.imread(f'{IN_PATH}/{scan}')
             
-            seg_3d(image3d, image_filter='Median', filter_size=5, crop_im=True, plot_seg=True)
-            
-            
-            """
-            image3d = crop3d(image3d)
-            
-            fig = plt.figure(figsize=[12, 4])
-            ax1 = fig.add_subplot(131)
-            ax2 = fig.add_subplot(132)
-            ax3 = fig.add_subplot(133)
-            
-            s = 4
-            
-            # image3d = ndimage.median_filter(image3d, size=s)
-            # fig.suptitle(f'Median Filter, size={s}')
-            
-            image3d = ndimage.gaussian_filter(image3d, sigma=s)
-            fig.suptitle(f'Gaussian Filter, sigma={s}')
-            
-            # image3d = ndimage.generic_filter(image3d, np.mean, size=s)
-            # fig.suptitle(f'Mean Filter, size={s}')
-            
-            mid_slice = find_mid(image3d)
-                        
-            ax1.imshow(image3d[mid_slice], cmap='gray')
-            
-            threshold, hist, bin_edges = find_threshold(image3d, return_hist=True)            
-            ax2.plot(bin_edges[0:-1], hist)
-            ax2.axvline(x=threshold, c='r')
+            x = seg_3d(image3d, image_filter='Mean', filter_size=5, crop_im=True, plot_seg=True)
 
-            seg_3d = np.where(image3d > threshold, 1, 0)
-            ax3.imshow(seg_3d[mid_slice], cmap='gray')
-            
-            plt.show()
-            """
