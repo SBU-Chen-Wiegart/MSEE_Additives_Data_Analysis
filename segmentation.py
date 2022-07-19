@@ -19,12 +19,12 @@ OUT_PATH = r'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Mo
 def find_mid(im):
     return int(im.shape[0] / 2)
 
-def crop3d(im):
+def crop3d(im, crop_size=100):
     """
-    crops 3d image to middle 10 slices
+    crops 3d image to middle number of slices specified 
     """
     mid_pt = find_mid(im)
-    return im[mid_pt - 5: mid_pt + 5]
+    return im[mid_pt - int(crop_size/2): mid_pt + int(crop_size/2)]
 
 def find_threshold(im2d, return_hist=False):
     """
@@ -102,5 +102,5 @@ if __name__ == '__main__':
         if any(str(scan_id) in scan for scan_id in scan_list):
             image3d = io.imread(f'{IN_PATH}/{scan}')
             
-            x = seg_3d(image3d, image_filter='Mean', filter_size=5, crop_im=True, plot_seg=True)
+            seg_3d(image3d, image_filter='Mean', filter_size=5, crop_im=True, plot_seg=True)
 
