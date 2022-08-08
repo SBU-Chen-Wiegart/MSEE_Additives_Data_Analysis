@@ -19,7 +19,7 @@ OUT_PATH = r'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Mo
 def find_mid(im):
     return int(im.shape[0] / 2)
 
-def crop3d(im, crop_size=100):
+def crop3d(im, crop_size=300):
     """
     crops 3d image to middle number of slices specified 
     """
@@ -71,7 +71,7 @@ def seg_3d(image3d, image_filter, filter_size, crop_im=False, plot_seg=False):
     
     threshold, hist, bin_edges = find_threshold(mid_slice, return_hist=True)
 
-    seg_image = np.where(image3d > threshold, 1, 0)     
+    seg_image = np.where(image3d > threshold, 1.0, 0.0)     
     
     if plot_seg:
         fig = plt.figure(figsize=[12, 4])
@@ -102,5 +102,6 @@ if __name__ == '__main__':
         if any(str(scan_id) in scan for scan_id in scan_list):
             image3d = io.imread(f'{IN_PATH}/{scan}')
             
-            seg_3d(image3d, image_filter='Mean', filter_size=5, crop_im=True, plot_seg=True)
-
+            seg_image = seg_3d(image3d, image_filter='Gaussian', filter_size=5, crop_im=False, plot_seg=True)
+            
+            io.imsave(f'{OUT_PATH}/seg_{scan}', np.float32(seg_image))
