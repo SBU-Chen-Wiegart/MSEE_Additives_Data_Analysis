@@ -20,7 +20,7 @@ OUT_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/cr
 def find_mid(im):
     return int(im.shape[0] / 2)
 
-def crop3d(im, crop_size=100):
+def crop3d(im, crop_size=300):
     """
     crops 3d image to middle number of slices specified 
     """
