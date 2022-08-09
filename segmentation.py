@@ -10,11 +10,12 @@ import matplotlib.pyplot as plt
 from skimage import io
 from os import listdir
 from scipy import signal, ndimage
+from skimage.filters import threshold_minimum
 
 # from normalize_count import rescale
 
-IN_PATH = r'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Molten Salt/EuCl3_in-situ/20210321_cropped_aligned'
-OUT_PATH = r'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Molten Salt/EuCl3_in-situ/segmentation_results'
+IN_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/cropped_aligned_new'
+OUT_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/cropped_new_segmentation'
 
 def find_mid(im):
     return int(im.shape[0] / 2)
@@ -31,15 +32,28 @@ def find_threshold(im2d, return_hist=False):
     finds threshold of 2d image from histogram
     """
     histogram, bin_edges = np.histogram(im2d, bins=256)
-    valleys = signal.find_peaks(-histogram, prominence=(1000), distance=10)[0]  # edit parameters if getting too many
+    valleys = signal.find_peaks(-histogram, prominence=1000, distance=10)[0]  # edit parameters if getting too many
     
     threshold = 0 
+    
+    # # check found valleys
+    # plt.plot(bin_edges[0:-1], histogram)
+    # for v in valleys:
+    #     plt.axvline(x=bin_edges[0:-1][v], c='r')
+    # plt.show()
+    # plt.clf()
+    
     if valleys.size == 1:
         threshold = bin_edges[0:-1][valleys[0]]
     if valleys.size == 2:
         threshold = bin_edges[0:-1][valleys[1]]
-    if valleys.size > 2:
+    if valleys.size == 3:
+        threshold = bin_edges[0:-1][valleys[2]]
+    if valleys.size > 3:
         print("change find_peaks parameters")
+    
+    
+    # threshold = threshold_minimum(im2d)
 
     if return_hist:
         return threshold, histogram, bin_edges
@@ -48,7 +62,7 @@ def find_threshold(im2d, return_hist=False):
 
 
 
-def seg_3d(image3d, image_filter, filter_size, crop_im=False, plot_seg=False):
+def seg_3d(image3d, image_filter, filter_size, crop_im=False, plot_seg=False, image_name=''):
     """
     Perform thresholding segmentation on 3d image. Threhold is determined from
     histogram of middle slice from 3d image.
@@ -71,7 +85,7 @@ def seg_3d(image3d, image_filter, filter_size, crop_im=False, plot_seg=False):
     
     threshold, hist, bin_edges = find_threshold(mid_slice, return_hist=True)
 
-    seg_image = np.where(image3d > threshold, 1, 0)     
+    seg_image = np.where(image3d > threshold, 1.0, 0.0)     
     
     if plot_seg:
         fig = plt.figure(figsize=[12, 4])
@@ -79,7 +93,10 @@ def seg_3d(image3d, image_filter, filter_size, crop_im=False, plot_seg=False):
         ax2 = fig.add_subplot(132)
         ax3 = fig.add_subplot(133)
         
-        fig.suptitle(f'{image_filter}, size={filter_size}')
+        if image_name:
+            fig.suptitle(f'{image_name}, {image_filter}, size={filter_size}')
+        else:
+            fig.suptitle(f'{image_filter}, size={filter_size}')
         
         ax1.imshow(image3d[mid_pt], cmap='gray')
 
@@ -95,12 +112,13 @@ def seg_3d(image3d, image_filter, filter_size, crop_im=False, plot_seg=False):
     
 
 if __name__ == '__main__':
-    scan_list = [92067, 92107, 92132]
+    scan_list = list(np.arange(92069, 92071+1))
     files = listdir(IN_PATH)
     
     for scan in files:
-        if any(str(scan_id) in scan for scan_id in scan_list):
+        if any(str(scan_id) in scan for scan_id in scan_list) and ('cropped' in scan):
             image3d = io.imread(f'{IN_PATH}/{scan}')
             
-            seg_3d(image3d, image_filter='Mean', filter_size=5, crop_im=True, plot_seg=True)
-
+            seg_image = seg_3d(image3d, image_filter='Gaussian', filter_size=3, crop_im=False, plot_seg=True, image_name=scan)
+            
+            io.imsave(f'{OUT_PATH}/seg_{scan}', np.float32(seg_image))
