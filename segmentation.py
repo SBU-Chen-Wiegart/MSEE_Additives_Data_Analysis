@@ -8,14 +8,14 @@ Created on Thu Jul  7 12:29:29 2022
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage import io
-from os import listdir
+from os import listdir, path
 from scipy import signal, ndimage
 from skimage.filters import threshold_minimum
 
 # from normalize_count import rescale
 
-IN_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/cropped_aligned_new'
-OUT_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/cropped_new_segmentation'
+IN_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/Charles/cropped_aligned_new'
+OUT_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/Charles/cropped_new_segmentation'
 
 def find_mid(im):
     return int(im.shape[0] / 2)
@@ -105,6 +105,10 @@ def seg_3d(image3d, image_filter, filter_size, crop_im=False, plot_seg=False, im
         
         ax3.imshow(seg_image[mid_pt], cmap='gray')
         
+               
+        if image_name:
+            plt.savefig(f'{OUT_PATH}/{image_name}_segmentation.png', format='png')
+        
         plt.show()
         
     return seg_image
@@ -112,13 +116,15 @@ def seg_3d(image3d, image_filter, filter_size, crop_im=False, plot_seg=False, im
     
 
 if __name__ == '__main__':
-    scan_list = list(np.arange(92069, 92071+1))
-    files = listdir(IN_PATH)
+    scan_list = list(np.arange(92079, 92079+1))
+    files = sorted(listdir(IN_PATH))
     
     for scan in files:
-        if any(str(scan_id) in scan for scan_id in scan_list) and ('cropped' in scan):
+        if any(str(scan_id) in scan for scan_id in scan_list) and ('aligned' in scan):
+        # if ('99925' in scan) or ('aligned' in scan):
             image3d = io.imread(f'{IN_PATH}/{scan}')
             
-            seg_image = seg_3d(image3d, image_filter='Gaussian', filter_size=3, crop_im=False, plot_seg=True, image_name=scan)
+            scan_name = path.splitext(scan)[0]  # remove file extension
+            seg_image = seg_3d(image3d, image_filter='Gaussian', filter_size=3, crop_im=False, plot_seg=True, image_name=scan_name)
             
             io.imsave(f'{OUT_PATH}/seg_{scan}', np.float32(seg_image))
