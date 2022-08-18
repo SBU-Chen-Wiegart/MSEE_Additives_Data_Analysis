@@ -10,16 +10,16 @@ from skimage import io, exposure
 import matplotlib.pyplot as plt
 from os.path import exists
 
-in_path = 'media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_backup/'
-out_path = 'media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_backup/cropped_new_bigger/'
+in_path = 'E:/20210321_FXI_Backup/'
+out_path = 'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Molten Salt/EuCl3_in-situ/20210321_cropped_aligned_old/crop_only/'
 
-x_min, x_max = 300, 1000
-y_min, y_max = 300, 1000
-z_min, z_max = 200, 800
+x_min, x_max = 300, 300+695
+y_min, y_max = 270, 270+710
+z_min, z_max = 300, 701
 
 # loop over scans to be processed
 if __name__ == '__main__':
-    for i in range(92064, 92133+1):
+    for i in range(92121, 92121+1):
         scan_id = str(i)
         fn = in_path + 'recon_scan_' + scan_id + '_bin1.h5'
         

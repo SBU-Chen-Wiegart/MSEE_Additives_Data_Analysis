@@ -14,8 +14,8 @@ from skimage.filters import threshold_minimum
 
 # from normalize_count import rescale
 
-IN_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/Charles/cropped_aligned_new'
-OUT_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/Charles/cropped_new_segmentation'
+IN_PATH = r'E:/20210321_FXI_Backup/Charles/cropped_aligned_new'
+OUT_PATH = r'E:/20210321_FXI_Backup/Charles/cropped_new_segmentation'
 
 def find_mid(im):
     return int(im.shape[0] / 2)
@@ -116,7 +116,7 @@ def seg_3d(image3d, image_filter, filter_size, crop_im=False, plot_seg=False, im
     
 
 if __name__ == '__main__':
-    scan_list = list(np.arange(92079, 92079+1))
+    scan_list = list(np.arange(92107, 92107+1))
     files = sorted(listdir(IN_PATH))
     
     for scan in files:
