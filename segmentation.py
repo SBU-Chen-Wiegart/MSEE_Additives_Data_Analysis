@@ -14,8 +14,8 @@ from skimage.filters import threshold_minimum
 
 # from normalize_count import rescale
 
-IN_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/Charles/cropped_aligned_new'
-OUT_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/Charles/cropped_new_segmentation'
+IN_PATH = r'/home/karenchen-wiegart/ChenWiegartgroup/Charles/20210709_EuCl3_in-situ_cropped_tomo'
+OUT_PATH = r'/media/karenchen-wiegart/20210709_FXI/XIAOYANG_Proposal_307818/Charles/seg_cropped_aligned'
 
 def find_mid(im):
     return int(im.shape[0] / 2)
@@ -43,17 +43,17 @@ def find_threshold(im2d, return_hist=False):
     # plt.show()
     # plt.clf()
     
-    if valleys.size == 1:
-        threshold = bin_edges[0:-1][valleys[0]]
-    if valleys.size == 2:
-        threshold = bin_edges[0:-1][valleys[1]]
-    if valleys.size == 3:
-        threshold = bin_edges[0:-1][valleys[2]]
-    if valleys.size > 3:
-        print("change find_peaks parameters")
+    # if valleys.size == 1:
+    #     threshold = bin_edges[0:-1][valleys[0]]
+    # if valleys.size == 2:
+    #     threshold = bin_edges[0:-1][valleys[1]]
+    # if valleys.size == 3:
+    #     threshold = bin_edges[0:-1][valleys[2]]
+    # if valleys.size > 3:
+    #     print("change find_peaks parameters")
     
     
-    # threshold = threshold_minimum(im2d)
+    threshold = threshold_minimum(im2d)
 
     if return_hist:
         return threshold, histogram, bin_edges
@@ -120,11 +120,11 @@ if __name__ == '__main__':
     files = sorted(listdir(IN_PATH))
     
     for scan in files:
-        if any(str(scan_id) in scan for scan_id in scan_list) and ('aligned' in scan):
-        # if ('99925' in scan) or ('aligned' in scan):
+        # if any(str(scan_id) in scan for scan_id in scan_list) and ('aligned' in scan):
+        if ('99925' in scan) or ('aligned' in scan):
             image3d = io.imread(f'{IN_PATH}/{scan}')
             
             scan_name = path.splitext(scan)[0]  # remove file extension
-            seg_image = seg_3d(image3d, image_filter='Gaussian', filter_size=3, crop_im=False, plot_seg=True, image_name=scan_name)
+            seg_image = seg_3d(image3d, image_filter='Gaussian', filter_size=2, crop_im=False, plot_seg=True, image_name=scan_name)
             
             io.imsave(f'{OUT_PATH}/seg_{scan}', np.float32(seg_image))

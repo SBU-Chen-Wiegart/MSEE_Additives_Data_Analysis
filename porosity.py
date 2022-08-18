@@ -10,7 +10,8 @@ from glob import glob
 from skimage import io
 import os
 
-IN_PATH = r'/media/karenchen-wiegart/20210321_FXI_backup/20210321_FXI_Backup/cropped_seg_masked'
+IN_PATH = r'/media/karenchen-wiegart/20210709_FXI/XIAOYANG_Proposal_307818/Charles/seg_masked'
+OUT_PATH = r'/media/karenchen-wiegart/20210709_FXI/XIAOYANG_Proposal_307818/Charles'
 os.chdir(IN_PATH)
 
 
@@ -36,12 +37,12 @@ if __name__ == '__main__':
         
         im3d = io.imread(fn)  # cropped and masked image
         
-        im3d = crop3d(im3d, crop_size=400)
+        im3d = crop3d(im3d, crop_size=200)
         
         material = np.count_nonzero(im3d==2)
         pores = np.count_nonzero(im3d==1)
         porosity[i] = pores / (material + pores)
         
     scan_porosity = np.vstack((scan, porosity)).T
-    np.savetxt('porosities.txt', scan_porosity, fmt=['%d','%.18e'], delimiter=', ', header='scan, porosity')
+    np.savetxt(f'{OUT_PATH}/porosities.txt', scan_porosity, fmt=['%d','%.18e'], delimiter=', ', header='scan, porosity')
     
