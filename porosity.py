@@ -15,7 +15,7 @@ OUT_PATH = r'/media/karenchen-wiegart/20210709_FXI/XIAOYANG_Proposal_307818/Char
 os.chdir(IN_PATH)
 
 
-def crop3d(im, crop_size=100):
+def crop3d(im, crop_size=200):
     """
     crops 3d image to middle number of slices specified 
     """
