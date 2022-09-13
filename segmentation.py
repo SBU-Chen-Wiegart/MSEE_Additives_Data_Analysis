@@ -8,19 +8,21 @@ Created on Thu Jul  7 12:29:29 2022
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage import io
-from os import listdir, path
+from os import listdir, path, chdir
 from scipy import signal, ndimage
 from skimage.filters import threshold_minimum
+from glob import glob
 
 # from normalize_count import rescale
 
-IN_PATH = r'/home/karenchen-wiegart/ChenWiegartgroup/Charles/20210709_EuCl3_in-situ_cropped_tomo'
-OUT_PATH = r'/media/karenchen-wiegart/20210709_FXI/XIAOYANG_Proposal_307818/Charles/seg_cropped_aligned'
+IN_PATH = r'/media/karenchen-wiegart/Lijie3/20210709_FXI_MSEE+/aligned'
+OUT_PATH = r'/media/karenchen-wiegart/Lijie3/20210709_FXI_MSEE+/segmentation'
+
 
 def find_mid(im):
     return int(im.shape[0] / 2)
 
-def crop3d(im, crop_size=300):
+def crop3d(im, *, crop_size):
     """
     crops 3d image to middle number of slices specified 
     """
@@ -116,15 +118,16 @@ def seg_3d(image3d, image_filter, filter_size, crop_im=False, plot_seg=False, im
     
 
 if __name__ == '__main__':
-    scan_list = list(np.arange(92079, 92079+1))
-    files = sorted(listdir(IN_PATH))
+    # scan_list = list(np.arange(99948, 100013+1))
+    # files = sorted(listdir(IN_PATH))
+    chdir(IN_PATH)
+    files = glob('*.tif')
+    print(files)
     
     for scan in files:
-        # if any(str(scan_id) in scan for scan_id in scan_list) and ('aligned' in scan):
-        if ('99925' in scan) or ('aligned' in scan):
-            image3d = io.imread(f'{IN_PATH}/{scan}')
+        image3d = io.imread(f'{IN_PATH}/{scan}')
             
-            scan_name = path.splitext(scan)[0]  # remove file extension
-            seg_image = seg_3d(image3d, image_filter='Gaussian', filter_size=2, crop_im=False, plot_seg=True, image_name=scan_name)
+        scan_name = path.splitext(scan)[0]  # remove file extension
+        seg_image = seg_3d(image3d, image_filter='Gaussian', filter_size=2, crop_im=False, plot_seg=True, image_name=scan_name)
             
-            io.imsave(f'{OUT_PATH}/seg_{scan}', np.float32(seg_image))
+        io.imsave(f'{OUT_PATH}/seg_{scan}', np.float32(seg_image))

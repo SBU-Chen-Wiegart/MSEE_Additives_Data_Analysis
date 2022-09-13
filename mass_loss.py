@@ -11,8 +11,8 @@ from os import listdir, chdir
 import segmentation
 from glob import glob
 
-IN_PATH = r'/media/karenchen-wiegart/20210709_FXI/XIAOYANG_Proposal_307818/Charles/seg_cropped_aligned'
-OUT_PATH = r'/media/karenchen-wiegart/20210709_FXI/XIAOYANG_Proposal_307818/Charles'
+IN_PATH = r'/media/karenchen-wiegart/Lijie3/20210709_FXI_MSEE+/segmentation'
+OUT_PATH = r'/media/karenchen-wiegart/Lijie3/20210709_FXI_MSEE+'
 chdir(IN_PATH)
 
 if __name__ == '__main__':

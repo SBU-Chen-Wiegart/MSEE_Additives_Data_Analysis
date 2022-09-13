@@ -10,6 +10,7 @@ from skimage import io, exposure
 import matplotlib.pyplot as plt
 from os.path import exists
 
+OUT_PATH = 'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Molten Salt/EuCl3_in-situ/mid_slices/20210321'
 
 def middle_slice(filename):
     mid_pt = int(file['img'].shape[0] / 2)
@@ -22,19 +23,19 @@ def middle_slice(filename):
     
     plt.imshow(img_rescale, cmap='gray')
     
-    io.imsave(scan_id + '.tif', img_rescale)
+    io.imsave(f'{OUT_PATH}/{scan_id}.tif', img_rescale)
 
 
 # loop over scans to be processed
-for i in range(99928, 99930+1):
+for i in range(92121, 92121+1):
     scan_id = str(i)
-    path = 'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Molten Salt/EuCl3_in-situ/count_scans/'
-    fn = path + 'count_id_' + scan_id + '.h5'
+    in_path = 'E:/20210321_FXI_Backup'
+    fn = f'{in_path}/recon_scan_{scan_id}_bin1.h5'
     
     # check that reconstructed scan exists
     if exists(fn):
         file = h5py.File(fn, 'r')  # load .h5 file
-        # middle_slice(fn)
+        middle_slice(fn)
     else: 
         print('no file found')
         
