@@ -2,8 +2,12 @@
 """
 Created on Thu Apr 21 17:36:14 2022
 
-@author: clark
 Based on code by Xiaoyin Zheng
+
+Use convex hull method to draw contour map over sample region in 3D image data.
+Contour map will be drawn over each cross-section in image stack.
+Output will be saved in OUT_PATH as ternary image (region outside sample = 0,
+sample material = 1, porous regions in sample = 2). 
 """
 
 import cv2
@@ -15,12 +19,12 @@ import os
 import glob
 import scipy as sp
 
-path = r'/media/karenchen-wiegart/Lijie3/20210709_FXI_MSEE+/segmentation'
+IN_PATH = r'/media/karenchen-wiegart/Lijie3/20210709_FXI_MSEE+/segmentation'
 OUT_PATH = r'/media/karenchen-wiegart/Lijie3/20210709_FXI_MSEE+/masked'
 # fn = r'seg_recon_92067_cropped.tif'
-os.chdir(path)
+os.chdir(IN_PATH)
 
-files = glob.glob('*99948*.tif')
+files = glob.glob('*.tif')
 
 
 def crop3d(im, crop_size=100):
