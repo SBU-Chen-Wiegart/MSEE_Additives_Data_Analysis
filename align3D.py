@@ -1,5 +1,15 @@
 # -*- coding: utf-8 -*-
 """
+Mingyuan Ge's code for 3D volume registration.
+Currently set up to sequentially perform image alignment/registration on 
+directory containing a series of 3D images as tif files (e.g. reconstructed
+tomography scans).
+
+To use set in_path to directory containing images, and out_path to desired 
+location for aligned images to be saved.
+NOTE: Expects input images to be named in the following format:
+    recon_{scan_id}_cropped.tif
+
 Created on Thu Apr 14 04:20:49 2022
 
 @author: 93969
@@ -55,9 +65,9 @@ def align_img3D(img_ref, img, align_flag=1):
     
 # loop for scan alignment (first scan should be aligned "manually")
 #%%
-# scans = np.arange(92078, 92079+1)
-# scan_list = [s for s in scans if os.path.exists(f'recon_{s}_cropped.tif')]
-scan_list = [92107, 92121]
+scans = np.arange(92078, 92079+1)
+scan_list = [s for s in scans if os.path.exists(f'recon_{s}_cropped.tif')]
+
 #%%
 for ind, scan_id in enumerate(scan_list):
     if ind != 0:

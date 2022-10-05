@@ -2,12 +2,13 @@
 File: read_tomo
 Name: Charles Clark
 -------------------
-Reads in 3D tomography data and crop to desired range (x, y, and z)
+Reads in 3D tomography from h5 files and crop to desired range (x, y, and z)
+Output images saved as 3D tif files in out_path directory
+
 """
 import numpy as np
 import h5py
-from skimage import io, exposure
-import matplotlib.pyplot as plt
+from skimage import io
 from os.path import exists
 
 in_path = 'E:/20210321_FXI_Backup/'
@@ -17,9 +18,14 @@ x_min, x_max = 300, 300+695
 y_min, y_max = 270, 270+710
 z_min, z_max = 300, 701
 
+first_scan = 92121
+last_scan = 92122
+
+scans = np.arange(first_scan, last_scan)
+
 # loop over scans to be processed
 if __name__ == '__main__':
-    for i in range(92121, 92121+1):
+    for i in scans:
         scan_id = str(i)
         fn = in_path + 'recon_scan_' + scan_id + '_bin1.h5'
         

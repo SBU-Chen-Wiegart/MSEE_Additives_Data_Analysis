@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 """
+Get the local times fly scans were taken and output as csv.
+To use set 'folder' variable to directory path containing fly scans, set 
+'scanlist' to the id #'s of scans to be checked, and set 'savefolder' to 
+directory where csv will be saved.
+
 Created on Fri Apr 22 15:01:44 2022
 
 @author: Chen-Wiegart

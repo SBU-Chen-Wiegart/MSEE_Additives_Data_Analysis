@@ -1,5 +1,8 @@
 # -*- coding: utf-8 -*-
 """
+Script for normalizing count scans from FXI beamline. White field and Dark 
+field need to be provided as image files (wf_file, df_file). 
+
 Created on Thu Jun 30 12:53:23 2022
 
 @author: clark
@@ -10,6 +13,8 @@ from skimage import io, exposure
 import matplotlib.pyplot as plt
 from os.path import exists
 
+in_path = 'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Molten Salt/EuCl3_in-situ/count_scans/'
+out_path = in_path
 
 def load_file(path, fn):
     if exists(path+fn):
@@ -32,9 +37,7 @@ if __name__ == '__main__':
     # loop over scans to be processed
     for i in range(99945, 99945+1):
         scan_id = str(i)
-        in_path = 'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Molten Salt/EuCl3_in-situ/count_scans/'
-        out_path = in_path
-        
+                
         target_file = 'count_id_' + scan_id + '.h5'        
         wf_file = '99926_bkg_avg.tif'
         df_file = '99926_dark_avg.tif'

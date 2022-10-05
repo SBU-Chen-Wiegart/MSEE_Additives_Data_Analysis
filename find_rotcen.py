@@ -1,5 +1,9 @@
 # -*- coding: utf-8 -*-
 """
+Script for retroactively retrieving rotation center on reconstructed tomography
+images. NOTE: does not find the rotation center on tomography data that has
+not yet been reconstructed.
+
 Created on Tue Jul 26 16:19:57 2022
 
 @author: crclark

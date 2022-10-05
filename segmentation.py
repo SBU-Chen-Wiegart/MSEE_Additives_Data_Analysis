@@ -1,5 +1,10 @@
 # -*- coding: utf-8 -*-
 """
+Perform segmentation on series of 3D images stored as tif files in 
+IN_PATH directory. Currently uses skimage threshold_minimum function on middle
+slice of 3D image stack to determine threshold for segmentation.
+Segmented binary images are saved to OUT_PATH.
+
 Created on Thu Jul  7 12:29:29 2022
 
 @author: clark

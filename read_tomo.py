@@ -2,7 +2,8 @@
 File: read_tomo
 Name: Charles Clark
 -------------------
-Reads in tomography data and converts middle slice to image file
+Reads in tomography data and saves middle slice to image file
+Good for getting initial visualization of a series of tomography scans
 """
 import numpy as np
 import h5py
@@ -10,6 +11,7 @@ from skimage import io, exposure
 import matplotlib.pyplot as plt
 from os.path import exists
 
+IN_PATH = 'E:/20210321_FXI_Backup'
 OUT_PATH = 'C:/Users/clark/OneDrive - Stony Brook University/Documents/Karen/Molten Salt/EuCl3_in-situ/mid_slices/20210321'
 
 def middle_slice(filename):
@@ -29,8 +31,8 @@ def middle_slice(filename):
 # loop over scans to be processed
 for i in range(92121, 92121+1):
     scan_id = str(i)
-    in_path = 'E:/20210321_FXI_Backup'
-    fn = f'{in_path}/recon_scan_{scan_id}_bin1.h5'
+    
+    fn = f'{IN_PATH}/recon_scan_{scan_id}_bin1.h5'
     
     # check that reconstructed scan exists
     if exists(fn):
