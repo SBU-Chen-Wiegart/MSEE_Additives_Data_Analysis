@@ -3,5 +3,7 @@ Collection of Python scripts for analyzing MSEE additives data. Many scripts can
 
 Most scripts follow similar format for usage:
 IN_PATH (or in_path) = directory containing series of images to be processed
+\n
 OUT_PATH (or out_path) = directory where processed images will be saved
+\n
 plus a loop over the scans/files within IN_PATH which processes each image
