@@ -68,9 +68,10 @@ plt.figure(figsize=[10,8])
 plt.title('50:50 $KCl$-$MgCl_2$, 1wt.% $EuCl_3$')
 plt.xlabel('Time (min)')
 plt.ylabel('Porosity (%)')
-plt.ylim([0,25])
 plt.plot(time_5050, porosity_5050*100, 'x', c='r')
 plt.savefig(f'{OUT_PATH}/50-50_porosity.tif', format='tif')
+
+plt.gca().set_ylim(bottom=0)
 plt.show()
 
 
@@ -78,9 +79,10 @@ plt.figure(figsize=[10,8])
 plt.title('Eutectic $KCl$-$MgCl_2$, 1wt.% $EuCl_3$')
 plt.xlabel('Time (min)')
 plt.ylabel('Porosity (%)')
-plt.ylim([0,30])
 plt.plot(time_eutectic, porosity_eutectic*100, 'x', c='k')
 plt.savefig(f'{OUT_PATH}/Eutectic_porosity.tif', format='tif')
+
+plt.gca().set_ylim(bottom=0)
 plt.show()
 
 plt.figure(figsize=[10,8])
@@ -89,7 +91,8 @@ plt.ylabel('Porosity (%)')
 plt.plot(time_5050, porosity_5050*100, 'x', c='r', label='50:50 $KCl$-$MgCl_2$')
 plt.plot(time_eutectic, porosity_eutectic*100, 'x', c='k', label='eutectic $KCl$-$MgCl_2$')
 plt.legend(fontsize=15)
-plt.ylim([0,30])
 plt.savefig(f'{OUT_PATH}/comparison_porosity.tif', format='tif')
+
+plt.gca().set_ylim(bottom=0)
 plt.show()
 
