@@ -1,5 +1,5 @@
 """
-File: read_tomo
+File: crop_tomo
 Name: Charles Clark
 -------------------
 Reads in 3D tomography from h5 files and crop to desired range (x, y, and z)
