@@ -8,7 +8,7 @@ The script then loops over all files in the IN_PATH directory, performs processi
 Scripts are intended to be ran in spyder with figures plotted in console window. Otherwise many figure windows may pop-up during processing. 
 
 
-Required packages:
+Required packages:  
 h5py  
 numpy  
 matplotlib  
