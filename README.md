@@ -4,12 +4,12 @@ Collection of Python scripts for analyzing MSEE additives data. Many scripts can
 Most scripts follow similar format:  
 `IN_PATH` (or `in_path`) = directory containing series of files/images to be processed  
 `OUT_PATH` (or `out_path`) = directory where processed files/images will be saved  
-The script then loops over all files in the IN_PATH directory, performs processing, and saves output to OUT_PATH.
+The script then loops over all files in the IN_PATH directory, performs processing, and saves output to OUT_PATH.  
 Scripts are intended to be ran in spyder with figures plotted in console window. Otherwise many figure windows may pop-up during processing. 
 
 
 Required packages:
-h5py
+h5py  
 numpy  
 matplotlib  
 pandas  
