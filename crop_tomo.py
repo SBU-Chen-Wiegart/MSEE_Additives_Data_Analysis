@@ -2,7 +2,7 @@
 File: crop_tomo
 Name: Charles Clark
 -------------------
-Reads in 3D tomography from h5 files and crop to desired range (x, y, and z)
+Reads in reconstructed 3D tomography data from h5 files and crops to desired range (x, y, and z).
 Output images saved as 3D tif files in out_path directory
 
 """
@@ -39,4 +39,4 @@ if __name__ == '__main__':
     
             io.imsave(out_path + 'recon_' + scan_id + '_cropped.tif', img)
         else:
-            print("error")
+            print(f"error reading scan {scan_id}")
