@@ -1,5 +1,5 @@
 """
-File: read_tomo
+File: mid_slice
 Name: Charles Clark
 -------------------
 Reads in tomography data and saves middle slice to image file
