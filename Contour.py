@@ -2,8 +2,12 @@
 """
 Created on Thu Apr 21 17:36:14 2022
 
-@author: clark
-Based on code by Xiaoyin Zheng
+Code by Xiaoyin Zheng
+
+Use convex hull method to draw contour map over sample region in 3D image data.
+Contour map will be drawn over each cross-section in image stack.
+Output will be saved in OUT_PATH as ternary image (region outside sample = 0,
+sample material = 1, porous regions in sample = 2). 
 """
 
 import cv2
