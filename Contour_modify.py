@@ -8,6 +8,11 @@ Use convex hull method to draw contour map over sample region in 3D image data.
 Contour map will be drawn over each cross-section in image stack.
 Output will be saved in OUT_PATH as ternary image (region outside sample = 0,
 sample material = 1, porous regions in sample = 2). 
+
+This script is modified to iteratively apply convex hull for drawing the contour
+map in each image. This helps remove "island" artifacts (i.e., isolated sections
+of the sample being marked incorrectly). The iter_num variable determines the 
+number of times the convex hull will be drawn. 
 """
 
 import cv2
