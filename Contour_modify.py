@@ -2,7 +2,7 @@
 """
 Created on Thu Apr 21 17:36:14 2022
 
-Based on code by Xiaoyin Zheng
+Code by Xiaoyin Zheng
 
 Use convex hull method to draw contour map over sample region in 3D image data.
 Contour map will be drawn over each cross-section in image stack.
