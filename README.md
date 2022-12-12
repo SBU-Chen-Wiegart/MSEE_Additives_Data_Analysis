@@ -31,3 +31,4 @@ opencv
 
 1. XANES plot
 2. TEM pixel Cr (or Ni) and O (or Cl) correlation
+3. extract 2D slices
