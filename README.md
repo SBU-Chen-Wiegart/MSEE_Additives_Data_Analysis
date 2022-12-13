@@ -31,4 +31,4 @@ opencv
 
 1. XANES plot: plotXANES_moltensalt_Additive.ipynb
 2. TEM pixel Cr (or Ni) and O (or Cl) correlation: plot_at_correlation.py
-3. extract 2D slices
+3. extract 2D slices: extract_2Dslice.py
