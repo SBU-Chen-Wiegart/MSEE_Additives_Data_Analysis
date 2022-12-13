@@ -29,6 +29,6 @@ opencv
 
 #12/12/2022  Script from Xiaoyang
 
-1. XANES plot
+1. XANES plot: plotXANES_moltensalt_Additive.ipynb
 2. TEM pixel Cr (or Ni) and O (or Cl) correlation
 3. extract 2D slices
